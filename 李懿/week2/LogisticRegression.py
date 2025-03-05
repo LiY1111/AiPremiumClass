@@ -15,14 +15,14 @@ y = y[:100]
 train_X, test_X, train_y, test_y = train_test_split(X, y, test_size=0.2, shuffle=True)
 
 #初始化模型参数
-thera = np.random.randn(1, 4)
+theta = np.random.randn(1, 4)
 bais = 0
 lr = 1e-3
 epoch = 2000
 
 #向前计算
-def forward(X, thera, bais):
-    z = np.dot(thera, X.T) + bais
+def forward(X, theta, bais):
+    z = np.dot(theta, X.T) + bais
     y_hat = 1 / (1 + np.exp(-z))
     return y_hat
 
@@ -34,28 +34,23 @@ def loss(y, y_hat):
 #梯度计算
 def gradient(x, y, y_hat):
     m = x.shape[-1]
-    delta_thera = np.dot(y_hat - y, x) / m
+    delta_theta = np.dot(y_hat - y, x) / m
     delta_bais = np.mean(y_hat - y)
-    return delta_thera, delta_bais
+    return delta_theta, delta_bais
 
 for i in range(epoch):
-    y_hat = forward(X, thera, bais)
+    y_hat = forward(X, theta, bais)
     loss_val = np.mean(loss(y, y_hat))
 
-    delta_thera , delta_bais = gradient(X, y, y_hat)
-    thera = thera - lr * delta_thera
+    delta_theta , delta_bais = gradient(X, y, y_hat)
+    theta = theta - lr * delta_theta
     bais = bais - lr * delta_bais
 
     if i % 100 == 0:
         acc = np.mean([np.round(y_hat) == y])
         print(f"loss:{loss_val}, acc:{acc}")
 
-ind = np.random.radnint(len(test_X))
-x = test_X[ind]
-y = test_y[ind]
-pred = np.round(forward(x, thera, bais))
-
-print(f"预测值:{pred} 真实值：{y}")
 
 
+np.savez("model_params.npz", theta=theta, bais=bais, test_X=test_X, test_y=test_y)
 
