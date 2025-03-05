@@ -51,6 +51,6 @@ for i in range(epoch):
         print(f"loss:{loss_val}, acc:{acc}")
 
 
-
+#将参数保存
 np.savez("model_params.npz", theta=theta, bais=bais, test_X=test_X, test_y=test_y)
 
