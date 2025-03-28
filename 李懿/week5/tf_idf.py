@@ -4,9 +4,10 @@ import bm25_code
 import numpy as np
 import tensorboard
 import tensorflow
-
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+
+#1. 实现基于豆瓣top250图书评论的简单推荐系统（TF-IDF及BM25两种算法实现）
 
 def fix_comments(file_name):
     lines = [line for line in open(file_name, 'r', encoding='utf-8').readlines()]
