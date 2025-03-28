@@ -8,6 +8,8 @@ import torch
 import os 
 import tensorflow as tf
 
+#2. 使用自定义的文档文本，通过fasttext训练word2vec训练词向量模型，并计算词汇间的相关度。（选做：尝试tensorboard绘制词向量可视化图）
+
 # 确保生成分词文件
 def prepare_corpus():
     with open('text.txt', 'r', encoding='utf-8') as f:
