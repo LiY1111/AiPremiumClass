@@ -1,4 +1,3 @@
-# 导入必要的库
 import torch
 import torch.nn as nn
 import jieba
@@ -7,12 +6,11 @@ import torch.optim as optim
 import pandas as pd
 import sentencepiece as spm
 
-# 数据加载函数：从CSV文件读取评论数据
+
 def load_data(file_name):
-    # 读取CSV文件
     data = pd.read_csv(file_name)
     preprocess = []
-    # 遍历每一行数据
+    
     for _, row in data.iterrows():
         star = int(row['Star'])  # 获取评分
         comment = str(row['Comment']).strip()  # 获取评论并去除首尾空格
